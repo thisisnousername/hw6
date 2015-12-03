@@ -10,9 +10,9 @@ using namespace std;
 
 void f(double* y, double* k, double* k1, double* k2, double* k3, double* h, const double a, const double b, const double c, const double dt){
 
-	k[0] = a*(y[1]-y[0]) + dt*h[0]*k1[0] + dt*h[1]*k2[0] + dt*h[2]*k3[0];
-	k[1] = y[0]*(b-y[2]) - y[1] + dt*h[0]*k1[1] + dt*h[1]*k2[1] + dt*h[2]*k3[1];
-	k[2] = y[0]*y[1]-c*y[2] + dt*h[0]*k1[2] + dt*h[1]*k2[2] + dt*h[2]*k3[2];
+	k[0] = a*((y[1]+dt*h[0]*k1[1]+dt*h[1]*k2[1]+dt*h[2]*k3[1])-(y[0]+dt*h[0]*k1[0]+dt*h[1]*k2[0]+dt*h[2]*k3[0]));
+	k[1] = (y[0]+dt*h[0]*k1[0]+dt*h[1]*k2[0]+dt*h[2]*k3[0])*(b-(y[2]+dt*h[0]*k1[2]+dt*h[1]*k2[2]+dt*h[2]*k3[2]))+(y[1]+dt*h[0]*k1[1]+dt*h[1]*k2[1]+dt*h[2]*k3[1]);
+	k[2] = (y[0]+dt*h[0]*k1[0]+dt*h[1]*k2[0]+dt*h[2]*k3[0])*(y[1]+dt*h[0]*k1[1]+dt*h[1]*k2[1]+dt*h[2]*k3[1])-c*(y[2]+dt*h[0]*k1[2]+dt*h[1]*k2[2]+dt*h[2]*k3[2]);
 
 }
 
